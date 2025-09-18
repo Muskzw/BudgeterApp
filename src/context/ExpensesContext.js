@@ -1,3 +1,4 @@
+import 'react-native-get-random-values';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { loadExpenses, saveExpenses } from '../storage/expenseStorage';
 import { v4 as uuidv4 } from 'uuid';

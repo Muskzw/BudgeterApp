@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { Button, TextInput, HelperText, Text } from 'react-native-paper';
+import { Button, TextInput, HelperText, Text, Chip } from 'react-native-paper';
 import { useExpenses } from '../context/ExpensesContext';
 import { format } from 'date-fns';
+import { DEFAULT_CATEGORIES } from '../constants/categories';
 
 const defaultExpense = {
   amount: '',
@@ -70,6 +71,18 @@ export default function AddEditExpenseScreen({ route, navigation }) {
         value={form.category}
         onChangeText={(t) => setForm((f) => ({ ...f, category: t }))}
       />
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+        {DEFAULT_CATEGORIES.map((c) => (
+          <Chip
+            key={c}
+            selected={form.category === c}
+            onPress={() => setForm((f) => ({ ...f, category: c }))}
+            style={{ marginVertical: 4 }}
+          >
+            {c}
+          </Chip>
+        ))}
+      </View>
       <TextInput
         label="Date"
         value={format(new Date(form.date), 'yyyy-MM-dd')}
